@@ -30,7 +30,7 @@ const server = http.createServer((req, res) => {
     // Construct the message
     const message = `Application Environment: ${environment.toUpperCase()}\n\nToday's Date and Time: ${formattedDate}`;
     
-    console.log(`Where will this console log go?`);
+    console.log(`Github actions should only run on branch main`);
     
     // Send the response
     res.end(message);
