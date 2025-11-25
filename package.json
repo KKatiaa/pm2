@@ -1,0 +1,13 @@
+{
+  "name": "my-awesome-package",
+  "version": "1.0.0",
+  "author": "Your Name <email@example.com> (https://example.com)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "^11.7.5"
+  }
+}
