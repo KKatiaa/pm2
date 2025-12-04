@@ -1,9 +1,6 @@
 name: Node.js CI
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
   build:
@@ -18,4 +15,17 @@ jobs:
           node-version: '18.x'
       - run: npm ci
       - run: npm run build --if-present
+      
+  deploy:
 
+  needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Server
+        run: |
+          ssh -i ~/.ssh/my-aws.pem ubuntu@44.222.101.74 'bash -s' <<EOF
+          cd /var/www/html/sources
+          git pull origin main
+          npm install --production
+          pm2 restart all
+          EOF
