@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Deploy to Server
         run: |
-          ssh -i ~/.ssh/my-aws.pem ubuntu@44.222.101.74 'bash -s' <<EOF
+          ssh -i ~/.ssh/my-aws.pem ubuntu@3.239.72.176 'bash -s' <<EOF
           cd /var/www/html/sources
           git pull origin main
           npm install --production
