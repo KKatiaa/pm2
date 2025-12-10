@@ -34,5 +34,5 @@ jobs:
         script: |
           cd /var/www/pm2/source
           git pull origin main
-          npm install --production
+          sudo npm install --production
           pm2 restart all
