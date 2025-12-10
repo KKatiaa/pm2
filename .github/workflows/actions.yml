@@ -16,15 +16,23 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       
-deploy:
-  needs: build
-  runs-on: ubuntu-latest
-  steps:
-    - name: Deploy to Server
-      run: |
-        ssh -i ~/.ssh/my-aws.pem ubuntu@44.222.101.74 'bash -s' <<EOF
-        cd /var/www/html/sources
-        git pull origin main
-        npm install --production
-        pm2 restart all
-        EOF
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Execute remote commands via SSH
+      uses: appleboy/ssh-action@v1.0.3 # Use a reliable SSH Action
+      with:
+        host: 3.239.72.176
+        username: ubuntu
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+        script: |
+          cd /var/www/pm2/source
+          git pull origin main
+          sudo npm install --production
+          pm2 restart all
