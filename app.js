@@ -28,7 +28,7 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
 
     // Construct the message
-    const message = `Application Environment: ${environment.toUpperCase()}\n\nToday's Date and Time: ${formattedDate} changes changes changes 3333333`;
+    const message = `Application Environment: ${environment.toUpperCase()}\n\nToday's Date and Time: ${formattedDate} changes changes changes`;
     
     console.log(`Github actions should only run on branch main`);
     
