@@ -11,16 +11,22 @@ jobs:
 
     runs-on: ubuntu-latest
     timeout-minutes: 30
-
-    steps:
-      - uses: actions/checkout@v5
-      - name: Use Node.js
-        timeout-minutes: 30
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18.x'
-      - run: npm ci
-      - run: npm run build --if-present
+  steps:
+    - name: Execute remote commands via SSH
+      timeout-minutes: 40
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: 3.239.72.176
+        username: ubuntu
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          echo "Starting 29-minute stability test..."
+          sleep 1740 # 29 хвилин у секундах
+          echo "Testing if connection is still alive..."
+          cd /var/www/pm2/source
+          git pull origin main
+          sudo npm install --production
+          pm2 restart all
       
   deploy:
     needs: build
