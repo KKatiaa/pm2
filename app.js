@@ -45,7 +45,7 @@ server.listen(port, () => {
 // Basic error handling for the server
 server.on('error', (err) => {
     if (err.code === 'EADDRINUSE') {
-        console.error(`Port ${port} is already in use. Please close the other application or choose a different port.`);
+        console.error(`Port ${port} is already in use. Please close the other applicatiodfdfdfdfdfdfdn or choose a different port.`);
     } else {
         console.error('Server error:', err);
     }
